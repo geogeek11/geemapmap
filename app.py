@@ -1,11 +1,13 @@
 import streamlit as st
 import ee
 import geemap.foliumap as geemap
-
+from google.oauth2 import service_account
+from ee import oauth
 
 st.title("IFAD Earth Engine Web App")
 
-
+credentials = service_account.Credentials.from_service_account_info(st.secrets, scopes=oauth.SCOPES) 
+ee.Initialize(credentials)
 
 m = geemap.Map()
 m.add_basemap("OpenTopoMap")
